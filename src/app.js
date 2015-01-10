@@ -20,7 +20,7 @@ main.on('click', 'up', function(e) {
   var menu = new UI.Menu({
     sections: [{
       items: [{
-        title: 'Pebble.js',
+        title: 'title',
         icon: 'images/menu_icon.png',
         subtitle: 'Can do Menus'
       }, {
