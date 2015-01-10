@@ -1,7 +1,9 @@
 /**
- * Welcome to Pebble.js!
+ * Hack UCSC 2015!
+ * Team: Don't Byte Me!
+ * App: Monster Track
+ * Summary: An fitness app that trains you
  *
- * This is where you write your app.
  */
 var Accel = require('ui/accel');
 var UI = require('ui');
@@ -9,6 +11,19 @@ var Vector2 = require('vector2');
 var steps = 0;
 var monsterSteps =-50;
 var death =false;
+var runnerSprite = [
+  {
+   position: new Vector2(-10,60),
+   size: new Vector2(80,35),
+  image: 'images/runner1.png' 
+  },
+  {
+   position: new Vector2(-10,60),
+   size: new Vector2(80,35),
+  image: 'images/runner2.png' 
+  },
+];
+
 
 var main = new UI.Card({
   title: 'Monster Track',
@@ -23,14 +38,15 @@ main.show();
 main.on('click', 'up', function(e) {    
 //Initalize local variables
   Accel.init();
-
   var didStep = false;
+  var monsterStepsDisplay = 10;
   var monTimer = setInterval(function () {monster()}, 1000);
 
   var runWind = new UI.Window();
+  
   var topRect = new UI.Rect({
-   position: new Vector2(10,5),
-  size: new Vector2(124,30),
+    position: new Vector2(10,5),
+    size: new Vector2(124,30),
     backgroundColor:'black'
     });
   var botRect = new UI.Rect({
@@ -53,34 +69,35 @@ main.on('click', 'up', function(e) {
     
     runWind.add(bgRect);
   
-  ////////////////Sprite Images on Screen//////////////////
-  var runner1pic = new UI.Image({
-    position: new Vector2(-10,60),
-    size: new Vector2(80,35),
-    image: 'images/runner1.png'
-  });  
+  ////////////////Sprite Images on Screen////////////////// 
   var deathP = new UI.Image({
     position: new Vector2(0,0),
     size: new Vector2(144,160),
     image: 'images/werewolfdead.png'
   });  
-  runWind.add(runner1pic);
   
   
     runWind.add(botRect);
     runWind.add(topRect);
     runWind.add(stepsDisplay);
-    //runWind.show();
+    runWind.show();
 
 ///////////////////Human Step Counter/////////////
   Accel.on('tap', function(e) {
-   // if (death === true){
+  //  if (death === true){
    // }else {
     if (e.direction > 0){
       didStep = true;
       }else{
       didStep = true;
     }
+    var runnerpic = new UI.Image({
+    position: runnerSprite[1].position,
+    size: runnerSprite[1].size,
+    image: runnerSprite[(steps%2)].image,
+    }); 
+    runWind.add(runnerpic);  
+
     //Step counter display settings
      var topRect = new UI.Rect({
     position: new Vector2(10,5),
@@ -110,11 +127,14 @@ main.on('click', 'up', function(e) {
   
 /////////////////Monster Step Counter//////////////////////
  function monster(){
+  //updates monster stats
   var monsterSpeed = Math.floor(Math.random() * (5-1) + 1);
   monsterSteps = monsterSteps+monsterSpeed; //i.e -500+1=-499
-  var monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499   
-    runWind.remove(botRect);
-    runWind.add(botRect);
+  monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499   
+  
+  //updates monster display 
+  runWind.remove(botRect);
+  runWind.add(botRect);
     var monsterDisplay = new UI.Text({
       position: new Vector2(10,110),
       size: new Vector2(124,20),
@@ -125,6 +145,8 @@ main.on('click', 'up', function(e) {
       }); 
     runWind.remove(monsterDisplay);
     runWind.add(monsterDisplay);
+   
+   //Death 
     if (monsterStepsDisplay <= 0){
       clearInterval(monTimer);
       runWind.add(deathP);
@@ -132,7 +154,6 @@ main.on('click', 'up', function(e) {
     runWind.show();
    console.log('human steps: '+steps+' -monstersteps: '+monsterSteps);
    console.log('monster steps display: '+ monsterStepsDisplay); 
-   
  }   
 });
 
