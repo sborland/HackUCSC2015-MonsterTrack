@@ -8,17 +8,17 @@ var UI = require('ui');
 var Vector2 = require('vector2');
 var runners = [
     {
-      title:"Zombie Run",
+      title:"Zombie",
       subtitle:'slow and easy',
       icon: 'images/photo.png'
     },
     {
-      title:"Werewolf Run",
+      title:"Werewolf",
       subtitle:'nice and steady',
       icon: 'images/photo.png'
     },
     {
-     title:"Vampire Run",
+     title:"Vampire",
       subtitle:'fast and hard',
       icon: 'images/photo.png' 
     } 
@@ -27,8 +27,8 @@ var runners = [
 var main = new UI.Card({
   title: 'Monster Track',
   icon: 'images/photo.png',
-  subtitle: 'Press Button to Run!',
-  body:  'Team Byte Me'
+  subtitle: 'Press Up to Run!',
+  body:  'Team Dont Byte Me'
 });
 
 main.show();
@@ -41,14 +41,20 @@ main.on('click', 'up', function(e) {
    }]
    });
 runMenu.on('select', function(event){
-    var slowWind = new UI.Window();
+    var runWind = new UI.Window();
+    var topRect = new UI.Rect({
+      position: new Vector2(10,5),
+      size: new Vector2(124,30),
+      backgroundColor:'black'
+      });
     var bgRect = new UI.Rect({
-      position: new Vector2(10,20),
-      size: new Vector2(124,60),
+      position: new Vector2(0,0),
+      size: new Vector2(144,168),
       backgroundColor:'white'
-  });
-  slowWind.add(bgRect);
-  slowWind.show();
+      });
+  runWind.add(bgRect);
+  runWind.add(topRect);
+  runWind.show();
     });
   
   runMenu.show();

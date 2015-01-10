@@ -1,10 +1,10 @@
 {
     "appKeys": {},
     "capabilities": [
-        "location"
+        ""
     ],
     "companyName": "sarahborland@yahoo.com",
-    "longName": "demo",
+    "longName": "Monster Track",
     "projectType": "pebblejs",
     "resources": {
         "media": [
@@ -36,7 +36,7 @@
             }
         ]
     },
-    "shortName": "demo",
+    "shortName": "MTrack",
     "uuid": "0112b2e0-fab0-43ca-96c8-58db25e6cf6f",
     "versionCode": 1,
     "versionLabel": "1.0",
