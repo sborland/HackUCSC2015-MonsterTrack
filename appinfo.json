@@ -30,13 +30,28 @@
                 "type": "font"
             },
             {
-                "file": "images/runner2.png",
-                "name": "IMAGES_RUNNER2_PNG",
+                "file": "images/Zdeathscreen.png",
+                "name": "IMAGES_ZDEATHSCREEN_PNG",
                 "type": "png"
             },
             {
-                "file": "images/werewolfdead.png",
-                "name": "IMAGES_WEREWOLFDEAD_PNG",
+                "file": "images/zombie1.png",
+                "name": "IMAGES_ZOMBIE1_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/zombie2.png",
+                "name": "IMAGES_ZOMBIE2_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/logo.png",
+                "name": "IMAGES_LOGO_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/runner2.png",
+                "name": "IMAGES_RUNNER2_PNG",
                 "type": "png"
             },
             {
