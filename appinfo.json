@@ -30,6 +30,11 @@
                 "type": "font"
             },
             {
+                "file": "images/werewolfdead.png",
+                "name": "IMAGES_WEREWOLFDEAD_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/runner1.png",
                 "name": "IMAGES_RUNNER1_PNG",
                 "type": "png"

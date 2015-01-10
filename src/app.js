@@ -7,50 +7,25 @@ var Accel = require('ui/accel');
 var UI = require('ui');
 var Vector2 = require('vector2');
 var steps = 0;
-var monsterSteps =-500;
-/*var runners = [
-    {
-      title:"Zombie",
-      subtitle:'slow and easy',
-      icon: 'images/photo.png'
-    },
-    {
-      title:"Werewolf",
-      subtitle:'nice and steady',
-      icon: 'images/photo.png'
-    },
-    {
-     title:"Vampire",
-      subtitle:'fast and hard',
-      icon: 'images/photo.png' 
-    } 
-  ];*/
+var monsterSteps =-50;
+var death =false;
 
 var main = new UI.Card({
   title: 'Monster Track',
   icon: 'images/photo.png',
-  subtitle: 'Press Up to Run!',
+  subtitle: 'Ready to Run!',
   body:  'Team Dont Byte Me'
 });
 
 main.show();
 
 
-main.on('click', 'up', function(e) {
-// var runMenu = new UI.Menu({
-  //  sections:[{
-   //   title: 'Pick Your Run',
-   //   items: runners
-  // }]
-  // });
-//runMenu.on('select', function(event){
-    
+main.on('click', 'up', function(e) {    
 //Initalize local variables
   Accel.init();
 
   var didStep = false;
-  var monsterSpeed = 1;
- // var death =false;
+  var monTimer = setInterval(function () {monster()}, 1000);
 
   var runWind = new UI.Window();
   var topRect = new UI.Rect({
@@ -77,13 +52,30 @@ main.on('click', 'up', function(e) {
     });
     
     runWind.add(bgRect);
+  
+  ////////////////Sprite Images on Screen//////////////////
+  var runner1pic = new UI.Image({
+    position: new Vector2(-10,60),
+    size: new Vector2(80,35),
+    image: 'images/runner1.png'
+  });  
+  var deathP = new UI.Image({
+    position: new Vector2(0,0),
+    size: new Vector2(144,160),
+    image: 'images/werewolfdead.png'
+  });  
+  runWind.add(runner1pic);
+  
+  
     runWind.add(botRect);
     runWind.add(topRect);
     runWind.add(stepsDisplay);
+    //runWind.show();
 
 ///////////////////Human Step Counter/////////////
   Accel.on('tap', function(e) {
-    console.log('tapevent on axis:', + e.axis + ' and direction: ' + e.direction);  
+   // if (death === true){
+   // }else {
     if (e.direction > 0){
       didStep = true;
       }else{
@@ -104,7 +96,7 @@ main.on('click', 'up', function(e) {
       color: 'white',
       textAlign: 'center'
       }); 
-    
+   
     //removes old step display and replaces it with new display
     if (didStep === true){ 
       runWind.remove(stepsDisplay);
@@ -113,49 +105,37 @@ main.on('click', 'up', function(e) {
       didStep = false;
     }
        runWind.show();
-       console.log('human steps: '+steps);
+  //  }
   });
   
 /////////////////Monster Step Counter//////////////////////
+ function monster(){
+  var monsterSpeed = Math.floor(Math.random() * (5-1) + 1);
   monsterSteps = monsterSteps+monsterSpeed; //i.e -500+1=-499
-  var monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499
-  //if (monsterStepsDisplay >= '0'){ //i.e 500-(500) =0
-   // death = true;
-  //}else{
-   /* var botRect = new UI.Rect({
-      position: new Vector2(60,5),
-      size: new Vector2(124,30),
-      backgroundColor:'black'
-    });*/
+  var monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499   
     runWind.remove(botRect);
     runWind.add(botRect);
     var monsterDisplay = new UI.Text({
       position: new Vector2(10,110),
       size: new Vector2(124,20),
-      text: 'zombie is '+monsterStepsDisplay+' steps away!',
+      font: 'gothic-14',
+      text: 'evil zombie is '+monsterStepsDisplay+' steps away!',
       color: 'white',
       textAlign: 'center'
       }); 
     runWind.remove(monsterDisplay);
     runWind.add(monsterDisplay);
+    if (monsterStepsDisplay <= 0){
+      clearInterval(monTimer);
+      runWind.add(deathP);
+    }
     runWind.show();
- // }
-console.log('monster steps: '+ monsterSteps); 
-    
-////////////////Sprite Images on Screen//////////////////
-  var runner1pic = new UI.Image({
-    position: new Vector2(-10,60),
-    size: new Vector2(80,35),
-    image: 'images/runner1.png'
-  });  
-  runWind.add(runner1pic);
-  
-  
-  runWind.show();
+   console.log('human steps: '+steps+' -monstersteps: '+monsterSteps);
+   console.log('monster steps display: '+ monsterStepsDisplay); 
+   
+ }   
 });
 
-//  runMenu.show();
-//});
 
 
 
