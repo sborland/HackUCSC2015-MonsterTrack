@@ -6,6 +6,7 @@
 var Accel = require('ui/accel');
 var UI = require('ui');
 var Vector2 = require('vector2');
+var steps = 0;
 var runners = [
     {
       title:"Zombie",
@@ -45,6 +46,12 @@ runMenu.on('select', function(event){
     Accel.init();
   Accel.on('tap', function(e) {
     console.log('tapevent on axis:', + e.axis + ' and direction: ' + e.direction);
+     if(e.direction <0){
+      steps =+ -(e.direction);
+    } else{
+      steps =+ e.direction;
+    }
+     console.log('this is steps:' + steps);
   }); 
     var runWind = new UI.Window();
     var topRect = new UI.Rect({
@@ -57,7 +64,7 @@ runMenu.on('select', function(event){
       size: new Vector2(144,168),
       backgroundColor:'white'
       });
-    var steps = e.direction;
+    
     var stepsDisplay = new UI.Text({
       position: new Vector2(10,5),
       size: new Vector2(124,20),
