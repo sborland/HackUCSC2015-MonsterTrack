@@ -41,11 +41,14 @@ main.on('click', 'up', function(e) {
    }]
    });
 runMenu.on('select', function(event){
-    var detailCard = new UI.Card({
-    title: 'test',
-    body: 'testing'
-    });
-  detailCard.show();
+    var slowWind = new UI.Window();
+    var bgRect = new UI.Rect({
+      position: new Vector2(10,20),
+      size: new Vector2(124,60),
+      backgroundColor:'white'
+  });
+  slowWind.add(bgRect);
+  slowWind.show();
     });
   
   runMenu.show();
