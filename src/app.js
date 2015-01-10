@@ -43,7 +43,9 @@ main.on('click', 'up', function(e) {
    });
   
 runMenu.on('select', function(event){
-    Accel.init();  
+    Accel.init();
+    //var death = false;
+    var didStep = false;
     var runWind = new UI.Window();
     var topRect = new UI.Rect({
       position: new Vector2(10,5),
@@ -55,24 +57,37 @@ runMenu.on('select', function(event){
       size: new Vector2(144,168),
       backgroundColor:'white'
       });
-  
     runWind.add(bgRect);
     runWind.add(topRect);
+  
      Accel.on('tap', function(e) { //step measuring thing
     console.log('tapevent on axis:', + e.axis + ' and direction: ' + e.direction);
-      steps =+ 1;
-      var stepsDisplay = new UI.Text({
+      
+       var stepsDisplay = new UI.Text({
       position: new Vector2(10,5),
       size: new Vector2(124,20),
       text: steps,
       color: 'white',
       textAlign: 'center'
-    });
-    console.log('this is steps:' + steps);
+      }); 
        runWind.add(stepsDisplay);
-  }); 
- 
+       
+       //Step counter display
+       if (e.direction > 0){
+        didStep = true;
+      }else{
+        didStep = true;
+      }
+      if (didStep === true){ 
+        steps += 1;
+        didStep = false;
+      }
+       
+       console.log('steps: '+steps);
+   
+    }); 
     runWind.show();
+ 
     });
   
   runMenu.show();
