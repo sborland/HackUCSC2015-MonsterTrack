@@ -30,6 +30,11 @@
                 "type": "font"
             },
             {
+                "file": "images/runner1.png",
+                "name": "IMAGES_RUNNER1_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/photo.png",
                 "name": "IMAGES_PHOTO_PNG",
                 "type": "png"
