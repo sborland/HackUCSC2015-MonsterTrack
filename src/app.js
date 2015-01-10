@@ -7,10 +7,8 @@ var Accel = require('ui/accel');
 var UI = require('ui');
 var Vector2 = require('vector2');
 var steps = 0;
-var timeSec = 0;
-var timeMin = 0;
-var timeHour = 0;
-var runners = [
+var monsterSteps =-500;
+/*var runners = [
     {
       title:"Zombie",
       subtitle:'slow and easy',
@@ -26,7 +24,7 @@ var runners = [
       subtitle:'fast and hard',
       icon: 'images/photo.png' 
     } 
-  ];
+  ];*/
 
 var main = new UI.Card({
   title: 'Monster Track',
@@ -37,87 +35,105 @@ var main = new UI.Card({
 
 main.show();
 
-main.on('click', 'up', function(e) {
- var runMenu = new UI.Menu({
-    sections:[{
-      title: 'Pick Your Run',
-      items: runners
-   }]
-   });
-  
-runMenu.on('select', function(event){
-    Accel.init();
-    //var death = false;
-    timeSec ++;
-  console.log('seconds is:' + timeSec);
-    var didStep = false;
 
-    var runWind = new UI.Window();
-    var topRect = new UI.Rect({
-      position: new Vector2(10,5),
-      size: new Vector2(124,30),
-      backgroundColor:'black'
-      });
-    var botRect = new UI.Rect({
-      position: new Vector2(60,5),
-      size: new Vector2(124,30),
-      backgroundColor:'black'
+main.on('click', 'up', function(e) {
+// var runMenu = new UI.Menu({
+  //  sections:[{
+   //   title: 'Pick Your Run',
+   //   items: runners
+  // }]
+  // });
+//runMenu.on('select', function(event){
+    
+//Initalize local variables
+  Accel.init();
+
+  var didStep = false;
+  var monsterSpeed = 1;
+ // var death =false;
+
+  var runWind = new UI.Window();
+  var topRect = new UI.Rect({
+   position: new Vector2(10,5),
+  size: new Vector2(124,30),
+    backgroundColor:'black'
     });
-    var bgRect = new UI.Rect({
-      position: new Vector2(0,0),
-      size: new Vector2(144,168),
-      backgroundColor:'white'
-      });
-    var timeDisplay = new UI.Text({
-      position: new Vector2(134,163),
-      size: new Vector2(124,20),
-      text: timeHour + ":" +  timeMin + ":" + timeSec,
-      color: 'white',
-      textAlign: 'center'
-      });
+  var botRect = new UI.Rect({
+    position: new Vector2(5,60),
+    size: new Vector2(124,30),
+    backgroundColor:'black'
+    });
+  var bgRect = new UI.Rect({
+    position: new Vector2(0,0),
+    size: new Vector2(144,168),
+    backgroundColor:'white'
+    });
     
     runWind.add(bgRect);
-   runWind.add(botRect);
+    runWind.add(botRect);
     runWind.add(topRect);
-    runWind.add(timeDisplay);
-    
-    if(timeSec == 60)
-      {
-        timeMin++;
-        timeSec = 0;
-      } 
-      if(timeMin == 60)
-      {
-        timeHour++;
-        timeMin = 0;
-      }
 
-  
-     Accel.on('tap', function(e) { //step measuring thing
+///////////////////Human Step Counter/////////////
+  Accel.on('tap', function(e) {
     console.log('tapevent on axis:', + e.axis + ' and direction: ' + e.direction);  
-       var stepsDisplay = new UI.Text({
+    if (e.direction > 0){
+      didStep = true;
+      }else{
+      didStep = true;
+    }
+    //Step counter display settings
+     var topRect = new UI.Rect({
+    position: new Vector2(10,5),
+    size: new Vector2(124,30),
+    backgroundColor:'black'
+    });
+    runWind.add(topRect);
+    
+    var stepsDisplay = new UI.Text({
       position: new Vector2(10,5),
       size: new Vector2(124,20),
       text: steps,
       color: 'white',
       textAlign: 'center'
       }); 
-       //Step counter display
-       if (e.direction > 0){
-        didStep = true;
-      }else{
-        didStep = true;
-      }
-      if (didStep === true){ 
-        runWind.remove(stepsDisplay);
-        steps += 1;
-        runWind.add(stepsDisplay);
-        didStep = false;
-      }
+    //removes old step display and replaces it with new display
+    if (didStep === true){ 
+      runWind.remove(stepsDisplay);
+      steps += 1;
+      runWind.add(stepsDisplay);
+      didStep = false;
+    }
        runWind.show();
-       console.log('steps: '+steps);
-    }); 
+       console.log('human steps: '+steps);
+  });
   
+/////////////////Monster Step Counter//////////////////////
+  monsterSteps = monsterSteps+monsterSpeed; //i.e -500+1=-499
+  var monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499
+  if (monsterStepsDisplay >= '0'){ //i.e 500-(500) =0
+   // death = true;
+  }else{
+   /* var botRect = new UI.Rect({
+      position: new Vector2(60,5),
+      size: new Vector2(124,30),
+      backgroundColor:'black'
+    });*/
+    runWind.remove(botRect);
+    runWind.add(botRect);
+    var monsterDisplay = new UI.Text({
+      position: new Vector2(5,60),
+      size: new Vector2(124,20),
+      text: 'Zombie is '+monsterStepsDisplay+' steps away!',
+      color: 'white',
+      textAlign: 'center'
+      }); 
+    runWind.remove(monsterDisplay);
+    runWind.add(monsterDisplay);
+    runWind.show();
+  }
+console.log('monster steps: '+ monsterSteps); 
+    
+////////////////Sprite Images on Screen//////////////////
   var runner1pic = new UI.Image({
     position: new Vector2(-10,60),
     size: new Vector2(80,35),
@@ -125,19 +141,12 @@ runMenu.on('select', function(event){
   });  
   runWind.add(runner1pic);
   
+  
   runWind.show();
-    });
-  runMenu.show();
 });
 
-
-
-
-
-
-
-
-
+//  runMenu.show();
+//});
 
 
 
