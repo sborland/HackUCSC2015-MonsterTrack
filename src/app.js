@@ -17,24 +17,40 @@ var main = new UI.Card({
 main.show();
 
 main.on('click', 'up', function(e) {
-  var menu = new UI.Menu({
+  var runMenu = new UI.Menu({
     sections: [{
       items: [{
-        title: 'title',
+        title: 'Test Run',
         icon: 'images/menu_icon.png',
-        subtitle: 'Can do Menus'
-      }, {
+        subtitle: 'Tester Stuff' }, 
+      
+     {
         title: 'Second Item',
         subtitle: 'Subtitle Text'
       }]
     }]
   });
-  menu.on('select', function(e) {
+  runMenu.on('select', function(e) {
     console.log('Selected item #' + e.itemIndex + ' of section #' + e.sectionIndex);
     console.log('The item is titled "' + e.item.title + '"');
   });
-  menu.show();
+  
+  runMenu.on('select', function(event){
+    var window = new UI.Window();
+    var bgRect = new UI.Rect({
+      position: new Vector2(10,20),
+      size: new Vector2(124, 60),
+      backgroundColor: 'white'
+    });
+    window.add(bgRect);
+  });
+  
+  runMenu.show();
+   
 });
+
+
+
 
 main.on('click', 'select', function(e) {
   var wind = new UI.Window();
