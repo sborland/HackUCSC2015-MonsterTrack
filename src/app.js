@@ -34,15 +34,30 @@ var main = new UI.Card({
 main.show();
 
 main.on('click', 'up', function(e) {
-  var runMenu = new UI.Menu({
+ var runMenu = new UI.Menu({
     sections:[{
       title: 'Pick Your Run',
       items: runners
-    }]
-  });
+   }]
+   });
+runMenu.on('select', function(event){
+    var detailCard = new UI.Card({
+    title: 'test',
+    body: 'testing'
+    });
+  detailCard.show();
+    });
   
-  runMenu.show();   
+  runMenu.show();
 });
+
+
+
+
+
+
+
+
 
 
 
