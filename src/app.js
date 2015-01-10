@@ -43,16 +43,7 @@ main.on('click', 'up', function(e) {
    });
   
 runMenu.on('select', function(event){
-    Accel.init();
-  Accel.on('tap', function(e) {
-    console.log('tapevent on axis:', + e.axis + ' and direction: ' + e.direction);
-     if(e.direction <0){
-      steps =+ -(e.direction);
-    } else{
-      steps =+ e.direction;
-    }
-     console.log('this is steps:' + steps);
-  }); 
+    Accel.init();  
     var runWind = new UI.Window();
     var topRect = new UI.Rect({
       position: new Vector2(10,5),
@@ -64,17 +55,23 @@ runMenu.on('select', function(event){
       size: new Vector2(144,168),
       backgroundColor:'white'
       });
-    
-    var stepsDisplay = new UI.Text({
+  
+    runWind.add(bgRect);
+    runWind.add(topRect);
+     Accel.on('tap', function(e) { //step measuring thing
+    console.log('tapevent on axis:', + e.axis + ' and direction: ' + e.direction);
+      steps =+ 1;
+      var stepsDisplay = new UI.Text({
       position: new Vector2(10,5),
       size: new Vector2(124,20),
       text: steps,
       color: 'white',
       textAlign: 'center'
     });
-    runWind.add(bgRect);
-    runWind.add(topRect);
-    runWind.add(stepsDisplay);
+    console.log('this is steps:' + steps);
+       runWind.add(stepsDisplay);
+  }); 
+ 
     runWind.show();
     });
   
