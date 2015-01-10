@@ -3,7 +3,7 @@
  *
  * This is where you write your app.
  */
-
+var Accel = require('ui/accel');
 var UI = require('ui');
 var Vector2 = require('vector2');
 var runners = [
@@ -40,7 +40,12 @@ main.on('click', 'up', function(e) {
       items: runners
    }]
    });
+  
 runMenu.on('select', function(event){
+    Accel.init();
+  Accel.on('tap', function(e) {
+    console.log('tapevent on axis:', + e.axis + ' and direction: ' + e.direction);
+  }); 
     var runWind = new UI.Window();
     var topRect = new UI.Rect({
       position: new Vector2(10,5),
@@ -52,9 +57,18 @@ runMenu.on('select', function(event){
       size: new Vector2(144,168),
       backgroundColor:'white'
       });
-  runWind.add(bgRect);
-  runWind.add(topRect);
-  runWind.show();
+    var steps = e.direction;
+    var stepsDisplay = new UI.Text({
+      position: new Vector2(10,5),
+      size: new Vector2(124,20),
+      text: steps,
+      color: 'white',
+      textAlign: 'center'
+    });
+    runWind.add(bgRect);
+    runWind.add(topRect);
+    runWind.add(stepsDisplay);
+    runWind.show();
     });
   
   runMenu.show();
