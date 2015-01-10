@@ -59,7 +59,7 @@ main.on('click', 'up', function(e) {
     backgroundColor:'black'
     });
   var botRect = new UI.Rect({
-    position: new Vector2(5,60),
+    position: new Vector2(10,110),
     size: new Vector2(124,30),
     backgroundColor:'black'
     });
@@ -68,10 +68,18 @@ main.on('click', 'up', function(e) {
     size: new Vector2(144,168),
     backgroundColor:'white'
     });
+  var stepsDisplay = new UI.Text({
+    position: new Vector2(10,5),
+    size: new Vector2(124,20),
+    text: 'START RUNNING!',
+    color: 'white',
+    textAlign: 'center'
+    });
     
     runWind.add(bgRect);
     runWind.add(botRect);
     runWind.add(topRect);
+    runWind.add(stepsDisplay);
 
 ///////////////////Human Step Counter/////////////
   Accel.on('tap', function(e) {
@@ -88,14 +96,15 @@ main.on('click', 'up', function(e) {
     backgroundColor:'black'
     });
     runWind.add(topRect);
-    
+  
     var stepsDisplay = new UI.Text({
       position: new Vector2(10,5),
       size: new Vector2(124,20),
-      text: steps,
+      text: 'you ran '+(steps+1)+' steps!',
       color: 'white',
       textAlign: 'center'
       }); 
+    
     //removes old step display and replaces it with new display
     if (didStep === true){ 
       runWind.remove(stepsDisplay);
@@ -110,9 +119,9 @@ main.on('click', 'up', function(e) {
 /////////////////Monster Step Counter//////////////////////
   monsterSteps = monsterSteps+monsterSpeed; //i.e -500+1=-499
   var monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499
-  if (monsterStepsDisplay >= '0'){ //i.e 500-(500) =0
+  //if (monsterStepsDisplay >= '0'){ //i.e 500-(500) =0
    // death = true;
-  }else{
+  //}else{
    /* var botRect = new UI.Rect({
       position: new Vector2(60,5),
       size: new Vector2(124,30),
@@ -121,16 +130,16 @@ main.on('click', 'up', function(e) {
     runWind.remove(botRect);
     runWind.add(botRect);
     var monsterDisplay = new UI.Text({
-      position: new Vector2(5,60),
+      position: new Vector2(10,110),
       size: new Vector2(124,20),
-      text: 'Zombie is '+monsterStepsDisplay+' steps away!',
+      text: 'zombie is '+monsterStepsDisplay+' steps away!',
       color: 'white',
       textAlign: 'center'
       }); 
     runWind.remove(monsterDisplay);
     runWind.add(monsterDisplay);
     runWind.show();
-  }
+ // }
 console.log('monster steps: '+ monsterSteps); 
     
 ////////////////Sprite Images on Screen//////////////////
