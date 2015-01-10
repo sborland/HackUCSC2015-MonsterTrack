@@ -6,6 +6,23 @@
 
 var UI = require('ui');
 var Vector2 = require('vector2');
+var runners = [
+    {
+      title:"Zombie Run",
+      subtitle:'slow and easy',
+      icon: 'images/photo.png'
+    },
+    {
+      title:"Werewolf Run",
+      subtitle:'nice and steady',
+      icon: 'images/photo.png'
+    },
+    {
+     title:"Vampire Run",
+      subtitle:'fast and hard',
+      icon: 'images/photo.png' 
+    } 
+  ];
 
 var main = new UI.Card({
   title: 'Monster Track',
@@ -18,35 +35,13 @@ main.show();
 
 main.on('click', 'up', function(e) {
   var runMenu = new UI.Menu({
-    sections: [{
-      items: [{
-        title: 'Test Run',
-        icon: 'images/menu_icon.png',
-        subtitle: 'Tester Stuff' }, 
-      
-     {
-        title: 'Second Item',
-        subtitle: 'Subtitle Text'
-      }]
+    sections:[{
+      title: 'Pick Your Run',
+      items: runners
     }]
   });
-  runMenu.on('select', function(e) {
-    console.log('Selected item #' + e.itemIndex + ' of section #' + e.sectionIndex);
-    console.log('The item is titled "' + e.item.title + '"');
-  });
   
-  runMenu.on('select', function(event){
-    var window = new UI.Window();
-    var bgRect = new UI.Rect({
-      position: new Vector2(10,20),
-      size: new Vector2(124, 60),
-      backgroundColor: 'white'
-    });
-    window.add(bgRect);
-  });
-  
-  runMenu.show();
-   
+  runMenu.show();   
 });
 
 
