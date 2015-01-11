@@ -12,29 +12,31 @@ var Vector2 = require('vector2');
 var steps = 0;
 var monsterSteps =-50;
 var death =false;
+var Vibe = require('ui/vibe');
+
 var rankCheck = [
   {
     check:0,
     rank:'Rank F: Monster Meat'
   },
   {
-   check:2,
+   check:5,
     rank:'Rank D: First to Fall'
   },
   {
-   check:4,
+   check:7,
    rank:'Rank C: Last Survivor' 
   },
   {
-    check:6,
+    check:8,
     rank:'Rank B: The King'
   },
   {
-    check:8,
+    check:9,
     rank:'Rank A: The Overlord'
   },
   {
-    check:9,
+    check:10,
     rank:'Rank S: The Conquerer'
   },
 ];
@@ -55,8 +57,7 @@ var runnerSprite = [
 var main = new UI.Card({
   title: 'Monster Track',
   icon: 'images/logo.png',
-  subtitle: 'Ready to Run!',
-  body:  'Brought to you by Team Dont Byte Me!'
+  body:  'Up for Zombie        Middle for Werewolf  Bottom for Vampire        Brought to you by Team Dont Byte Me'
 });
 
 main.show();
@@ -67,7 +68,7 @@ main.on('click', 'up', function(e) {
   Accel.init();
   var didStep = false;
   var monsterStepsDisplay = 10;
-  var monTimer = setInterval(function () {monster()}, 5000);
+  var monTimer = setInterval(function () {monster()}, 3000);
 
   var runWind = new UI.Window();
   
@@ -179,6 +180,10 @@ main.on('click', 'up', function(e) {
     runWind.remove(monsterDisplay);
     runWind.add(monsterDisplay);
    
+   if(monsterStepsDisplay<10){
+     Vibe.vibrate('short');
+   } 
+   
    //Death 
     if (monsterStepsDisplay <= 0){
       death = true;
@@ -204,6 +209,9 @@ main.on('click', 'up', function(e) {
      body:rankStr,
    });
    runWind.hide();
+   steps = 0;
+    monsterSteps =-50;
+    death =false;
    deathCard.show();
  }
 
@@ -328,6 +336,10 @@ main.on('click', 'select', function(e) {
     runWind.remove(monsterDisplay);
     runWind.add(monsterDisplay);
    
+   if(monsterStepsDisplay<10){
+     Vibe.vibrate('short');
+   } 
+   
    //Death 
     if (monsterStepsDisplay <= 0){
       death = true;
@@ -352,6 +364,9 @@ main.on('click', 'select', function(e) {
      banner: 'images/werewolfdead1.png'///CHANGE
    });
    runWind.hide();
+   steps = 0;
+    monsterSteps =-50;
+    death =false;
    deathCard.show();
  }
 
@@ -456,7 +471,7 @@ main.on('click', 'down', function(e) {
 /////////////////Monster Step Counter//////////////////////
  function monster(){
   //updates monster stats
-  var monsterSpeed = Math.floor(Math.random() * (8-1) + 1); // CHANGE
+  var monsterSpeed = Math.floor(Math.random() * (5-1) + 1); // CHANGE
   monsterSteps = monsterSteps+monsterSpeed; //i.e -500+1=-499
   monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499   
    
@@ -473,6 +488,10 @@ main.on('click', 'down', function(e) {
       }); 
     runWind.remove(monsterDisplay);
     runWind.add(monsterDisplay);
+   
+  if(monsterStepsDisplay<10){
+     Vibe.vibrate('short');
+   } 
    
    //Death 
     if (monsterStepsDisplay <= 0){
@@ -497,6 +516,10 @@ main.on('click', 'down', function(e) {
      banner: 'images/vampiredead2.png'
    });
    runWind.hide();
+    steps = 0;
+    monsterSteps =-50;
+    death =false;
+   Vibe.vibrate('short');
    deathCard.show();
  }
 
