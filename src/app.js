@@ -68,7 +68,7 @@ main.on('click', 'up', function(e) {
   Accel.init();
   var didStep = false;
   var monsterStepsDisplay = 10;
-  var monTimer = setInterval(function () {monster()}, 3000);
+  var monTimer = setInterval(function () {monster()}, 2000);
 
   var runWind = new UI.Window();
   
@@ -162,7 +162,7 @@ main.on('click', 'up', function(e) {
 /////////////////Monster Step Counter//////////////////////
  function monster(){
   //updates monster stats
-  var monsterSpeed = Math.floor(Math.random() * (3-1) + 1);
+  var monsterSpeed = Math.floor(Math.random() * (8-1) + 1);
   monsterSteps = monsterSteps+monsterSpeed; //i.e -500+1=-499
   monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499   
    
@@ -224,7 +224,7 @@ main.on('click', 'select', function(e) {
   Accel.init();
   var didStep = false;
   var monsterStepsDisplay = 10;
-  var monTimer = setInterval(function () {monster()}, 3000);
+  var monTimer = setInterval(function () {monster()}, 2000);
 
   var runWind = new UI.Window();
   
@@ -318,7 +318,7 @@ main.on('click', 'select', function(e) {
 /////////////////Monster Step Counter//////////////////////
  function monster(){
   //updates monster stats
-  var monsterSpeed = Math.floor(Math.random() * (5-1) + 1);
+  var monsterSpeed = Math.floor(Math.random() * (8-1) + 1);
   monsterSteps = monsterSteps+monsterSpeed; //i.e -500+1=-499
   monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499   
    
@@ -471,7 +471,7 @@ main.on('click', 'down', function(e) {
 /////////////////Monster Step Counter//////////////////////
  function monster(){
   //updates monster stats
-  var monsterSpeed = Math.floor(Math.random() * (5-1) + 1); // CHANGE
+  var monsterSpeed = Math.floor(Math.random() * (8-1) + 1); // CHANGE
   monsterSteps = monsterSteps+monsterSpeed; //i.e -500+1=-499
   monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499   
    
