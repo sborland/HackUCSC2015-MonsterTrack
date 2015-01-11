@@ -15,27 +15,27 @@ var death =false;
 var rankCheck = [
   {
     check:0,
-    rank:'Rank F:Monster Meat'
+    rank:'Rank F: Monster Meat'
   },
   {
    check:2,
-    rank:'Rank D:First Fallen'
+    rank:'Rank D: First to Fall'
   },
   {
    check:4,
-   rank:'Rank C:Last Survivor' 
+   rank:'Rank C: Last Survivor' 
   },
   {
     check:6,
-    rank:'Rank B:The King'
+    rank:'Rank B: The King'
   },
   {
     check:8,
-    rank:'Rank A:The Overlord'
+    rank:'Rank A: The Overlord'
   },
   {
     check:9,
-    rank:'Rank S:The Conquerer'
+    rank:'Rank S: The Conquerer'
   },
 ];
 
@@ -155,12 +155,7 @@ main.on('click', 'up', function(e) {
       runWind.add(stepsDisplay);
       didStep = false;  
     }
-  //  if (death === true){
-  // runWind.add(deathP);
-   // }
   }
-console.log('accel death?: '+death);
-//console.log('accel onscreen: '+runWind.index(deathP));
 });
   
 /////////////////Monster Step Counter//////////////////////
@@ -203,11 +198,10 @@ console.log('accel death?: '+death);
        rankStr = rankCheck[i].rank;
      }
    }
-   //console.log('ranking: '+rankStr);
    var deathCard = new UI.Card({
      title:'Ran '+steps+' steps!',
+      banner: 'images/Zdeathscreen.png',
      body:rankStr,
-     banner: 'images/Zdeathscreen.png',
    });
    runWind.hide();
    deathCard.show();
