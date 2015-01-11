@@ -3,7 +3,8 @@
  * Team: Don't Byte Me!
  * App: Monster Track
  * Summary: An fitness app that trains you
- *
+ * Programmed by Sarah Borland & Karl Cassel
+ * Art by Maria Zdorova, Yuna Choe & Aubrey Issacman
  */
 var Accel = require('ui/accel');
 var UI = require('ui');
@@ -21,19 +22,19 @@ var rankCheck = [
     rank:'Rank D:First Fallen'
   },
   {
-   check:3,
+   check:4,
    rank:'Rank C:Last Survivor' 
   },
   {
-    check:4,
+    check:6,
     rank:'Rank B:The King'
   },
   {
-    check:5,
+    check:8,
     rank:'Rank A:The Overlord'
   },
   {
-    check:6,
+    check:9,
     rank:'Rank S:The Conquerer'
   },
 ];
@@ -50,19 +51,6 @@ var runnerSprite = [
   image: 'images/runner2.png' 
   },
 ];
-/*var zombieSprite = [
-  {
-   position: new Vector2(60,60),
-   size: new Vector2(80,35),
-  image: 'images/zombie1.png' 
-  },
-  {
- position: new Vector2(60,60),
-  size: new Vector2(80,35),
- image: 'images/zombie2.png' 
-  },
-];*/
-
 
 var main = new UI.Card({
   title: 'Monster Track',
@@ -350,9 +338,6 @@ main.on('click', 'select', function(e) {
     if (monsterStepsDisplay <= 0){
       death = true;
       clearInterval(monTimer);
-      steps = 0;
-      monsterSteps =-50;
-      death =false;
       deathscreen();
     } 
  }  
@@ -477,7 +462,7 @@ main.on('click', 'down', function(e) {
 /////////////////Monster Step Counter//////////////////////
  function monster(){
   //updates monster stats
-  var monsterSpeed = Math.floor(Math.random() * (5-1) + 1); // CHANGE
+  var monsterSpeed = Math.floor(Math.random() * (8-1) + 1); // CHANGE
   monsterSteps = monsterSteps+monsterSpeed; //i.e -500+1=-499
   monsterStepsDisplay = steps-monsterSteps; //i.e 0-(-499)=499   
    
@@ -499,9 +484,6 @@ main.on('click', 'down', function(e) {
     if (monsterStepsDisplay <= 0){
       death = true;
       clearInterval(monTimer);
-      steps = 0;
-      monsterSteps =-50;
-      death =false;
       deathscreen();
     } 
  }  
@@ -515,11 +497,10 @@ main.on('click', 'down', function(e) {
        rankStr = rankCheck[i].rank;
      }
    }
-   //console.log('ranking: '+rankStr);
    var deathCard = new UI.Card({
-     title:'Ran '+steps+' steps!',
+     title:'Ran '+steps+' steps',
      body:rankStr,
-     banner: 'images/vampiredead2.png'///CHANGE
+     banner: 'images/vampiredead2.png'
    });
    runWind.hide();
    deathCard.show();
